@@ -20,7 +20,7 @@ read -p $'Enter the baudrate of your printer serial port (Ex: \033[1m115200\033[
 
 read -p $'Enter a port on which to access this server (Ex: Ex: \033[1m10001\033[0m): ' LOCALPORT;
 
-mkdir /root/tcp2serial-bridge
+mkdir -p /root/tcp2serial-bridge
 echo "-P ${LOCALPORT} ${SERIALPORT} ${BAUDRATE}" > /root/tcp2serial-bridge/args
 
 . /lib/functions/network.sh; network_find_wan NET_IF; network_get_ipaddr NET_ADDR "${NET_IF}";
@@ -45,7 +45,7 @@ download_pyserial_tcp2serial_bridge(){
 echo -e "\033[1mDownloading pyserial tcp to serial bridge...\033[0m"
 echo ""
 
-cd /root/tcp_serial_bridge
+cd /root/tcp2serial-bridge
 wget https://raw.githubusercontent.com/pyserial/pyserial/master/examples/tcp_serial_redirect.py
 chmod +x ./tcp_serial_redirect.py
 }
