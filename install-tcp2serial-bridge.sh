@@ -18,7 +18,7 @@ read -p $'Enter your printer USB serial port (Ex: \033[1m/dev/ttyUSB0\033[0m): '
 
 read -p $'Enter the baudrate of your printer serial port (Ex: \033[1m115200\033[0m) : ' BAUDRATE;
 
-read -p $'Enter a port on which to access this server (Ex: Ex: \033[1m10001\033[0m): ' LOCALPORT;
+read -p $'Enter a port on which to access this server (Ex: \033[1m10001\033[0m): ' LOCALPORT;
 
 mkdir -p /root/tcp2serial-bridge
 echo "-P ${LOCALPORT} ${SERIALPORT} ${BAUDRATE}" > /root/tcp2serial-bridge/args
