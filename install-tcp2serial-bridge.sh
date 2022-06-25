@@ -3,11 +3,6 @@
 # exit when any command fails
 set -e
 
-# keep track of the last executed command
-#trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
-# echo an error message before exiting
-#trap 'echo "\"${last_command}\" command failed with exit code $?."' EXIT
-
 #markup
 yellow="\033[38;5;11m"
 green="\e[32m"
@@ -25,15 +20,15 @@ read -p $'Enter the baudrate of your printer serial port (Ex: \033[1m115200\033[
 
 read -p $'Enter a port on which to access this server (Ex: Ex: \033[1m10001\033[0m): ' LOCALPORT;
 
-mkdir /root/tcp_serial_bridge
-echo "-P ${LOCALPORT} ${SERIALPORT} ${BAUDRATE}" > /root/tcp_serial_bridge/args
+mkdir /root/tcp2serial-bridge
+echo "-P ${LOCALPORT} ${SERIALPORT} ${BAUDRATE}" > /root/tcp2serial-bridge/args
 
 . /lib/functions/network.sh; network_find_wan NET_IF; network_get_ipaddr NET_ADDR "${NET_IF}";
 BOXIP=$(echo ${NET_ADDR})
 
 
 echo " "
-echo -e "You'll be able to change this variables by editing \033[1m/etc/profile\033[0m"
+echo -e "You'll be able to change this variables by editing \033[1m/root/tcp2serial-bridge/args\033[0m"
 echo " "
 sleep 2
 }
@@ -69,7 +64,7 @@ USE_PROCD=1
 start_service() {
     procd_open_instance
     procd_set_param command /usr/bin/python3 \
-        /root/tcp_serial_bridge/tcp_serial_redirect.py $(cat /root/tcp_serial_bridge/args)
+        /root/tcp2serial-bridge/tcp_serial_redirect.py $(cat /root/tcp2serial-bridge/args)
     procd_set_param respawn
     procd_set_param stdout 1
     procd_set_param stderr 1
