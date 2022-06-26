@@ -5,6 +5,7 @@
  
  **1. Clone the repo:**
 ```
+opkg update && opkg install git-http
 git clone https://github.com/ihrapsa/tcp2serial-bridge.git
 ```
  **2. Install:**
