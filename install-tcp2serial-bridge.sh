@@ -65,7 +65,7 @@ start_service() {
     procd_open_instance
     procd_set_param command /usr/bin/python3 \
         /root/tcp2serial-bridge/tcp_serial_redirect.py $(cat /root/tcp2serial-bridge/args)
-    procd_set_param respawn
+    procd_set_param respawn 60 5 0
     procd_set_param stdout 1
     procd_set_param stderr 1
     procd_close_instance
